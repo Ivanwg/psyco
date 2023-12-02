@@ -32,6 +32,11 @@ class VideoDetail(LoginRequiredMixin, DetailView):
     login_url = reverse_lazy('login')
     context_object_name = 'video'
     
+class QuizDetail(LoginRequiredMixin, TemplateView):
+    model = Quiz
+    template_name = 'quiz.html'
+    login_url = reverse_lazy('login')
+    context_object_name = 'quiz'
 
 
 # def detail(request):

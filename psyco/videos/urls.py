@@ -8,4 +8,5 @@ urlpatterns = [
     path('cources/', Cources.as_view(), name='cources'),
     path('cources/<int:pk>', CourceDetail.as_view(), name='cource'),
     path('watch/<int:pk>', VideoDetail.as_view(), name='watch'),
+    path('quiz/<int:pk>', QuizDetail.as_view(), name='quiz'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

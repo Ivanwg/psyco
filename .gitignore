@@ -134,3 +134,6 @@ dmypy.json
 
 # Jetbrains Intellij IDEA
 .idea/
+
+
+/post

@@ -8,14 +8,36 @@
   <div class="container">
     <div class="cources-page__content">
       <div class="cources-page__cources">
-        <div class="section-mb">
-
-          <h1 class="title-1 title-mb cources-page__cources-title">
-            Проверочная работа по теме: {{cource.title}}
+        <div class="section-mb js-first-quiz">
+{% if quiz %}
+<p>dd</p>
+{% else %}
+<p>c</p>
+{% endif %}
+          <h1 class="title-2 title-mb cources-page__cources-title">
+            Проверочная работа по теме: {{quiz.is_active}}
           </h1>
-          <p class="title-mb"> {{cource.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia in voluptatum quis esse nam laborum, sint facilis nulla amet! Laudantium eius, corrupti nulla unde ipsam dolor molestias quis quas. Vel!</p>
+          <p class="title-mb"> {{quiz}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia in voluptatum quis esse nam laborum, sint facilis nulla amet! Laudantium eius, corrupti nulla unde ipsam dolor molestias quis quas. Vel!</p>
           <button class="rect-btn rect-btn_theme">Начать</button>
         </div>
+
+        <div class="section-mb faded js-finish-quiz">
+          <h1 class="title-2 title-mb">Тест завершен</h1>
+          <p class="title-mb">Вы набрали <span>19</span> из 10</p>
+
+          <button class="rect-btn title-mb">Смотреть результаты</button>
+          <button class="rect-btn rect-btn_theme" onClick="javascript:history.go(-1);">К списку уроков</button>
+        </div>
+
+        <acticle class="quiz faded">
+          <h2 class="title-2">Вопрос</h2>
+          <ul class="quiz__list">
+            <li class="quiz__item"></li>
+          </ul>
+          <button class="ret-btn">Далее</button>
+        </acticle>
+
+
 
 
       </div>
