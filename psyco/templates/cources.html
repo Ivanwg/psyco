@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block page_content %}
+
+<div class="cources-page">
+  <div class="container">
+    <div class="cources-page__content">
+      <p class="first-title">
+        Добро пожаловать, {{ request.user.username }}!
+      </p>
+
+      <p>
+        Сейчас лучшее время, чтобы узнать что-то новое:)
+      </p>
+
+      <div class="cources-page__cources">
+        <h2 class="title-2 title-mb cources-page__cources-title">
+          Доступные курсы
+        </h2>
+
+        {% if cources|length %}
+        <ul class="cources-page__cources-list">
+          {% for item in cources %}
+          <li>
+            <div class="cource-card">
+              <div class="cource-card__img-wrap">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" alt="">
+                {% else %}
+                <img src="{% static 'img/logo_short.png' %}" alt="">
+                {% endif %}
+              </div>
+              <div class="">
+                <h5 class="title-5 cource-card__title">{{ item.title }}</h5>
+                <p>{{ item.description }}</p>
+
+              </div>
+              <a href="{% url 'cource' pk=item.id %}" class="cource-card__link"></a>
+            </div>
+
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Доступных курсов пока нет, но, возможно, скоро все изменится...)</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+  <header class="header">
+    <div class="container">
+      <div class="header__content">
+        <a href="{% url 'home' %}" class="logo header__logo">
+          <img src="{% static 'img/logo-large.png' %}" alt="">
+          <img src="{% static 'img/logo_short.png' %}" alt="">
+        </a>
+        {% if request.user.is_authenticated %}
+         <div>
+             <a class="black-link fw-medium" href="{% url 'logout' %}">Выход</a>
+         </div>
+        {% else %}
+        <div class="">
+          <a class="black-link fw-medium" href="{% url 'login' %}">Вход</a> |
+          <a class="black-link fw-medium" href="{% url 'register' %}">Регистрация</a>
+
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </header>

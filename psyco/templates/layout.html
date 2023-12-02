@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+  {% block header %}
+    {% include 'header.html' %}
+  {% endblock %}
+  <main>
+    {% block page_content %}
+    {% endblock %}
+  </main>
+
+
+  {% block footer %}
+    {% include 'footer.html' %}
+  {% endblock %}
+
+
+
+{% endblock %}
+
+
+

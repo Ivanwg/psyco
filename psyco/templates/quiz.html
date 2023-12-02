@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block page_content %}
+
+<div class="cources-page">
+  <div class="container">
+    <div class="cources-page__content">
+      <div class="cources-page__cources">
+        <div class="section-mb">
+
+          <h1 class="title-1 title-mb cources-page__cources-title">
+            Проверочная работа по теме: {{cource.title}}
+          </h1>
+          <p class="title-mb"> {{cource.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia in voluptatum quis esse nam laborum, sint facilis nulla amet! Laudantium eius, corrupti nulla unde ipsam dolor molestias quis quas. Vel!</p>
+          <button class="rect-btn rect-btn_theme">Начать</button>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

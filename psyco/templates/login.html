@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block page_content %}
+<div class="underheader sign-block">
+  <div class="container">
+    <div class="sign-block__content">
+      <h1 class="title-2 text-center">Вход</h1>
+      <form method="post" action="{% url 'login' %}" class="form">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="common-errors">
+          {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        {{ form.non_field_errors }}
+        {% for field in form.visible_fields %}
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field }}
+        {% endfor %}
+        <label>
+          {% if field.label|lower == 'username' %}
+          Введите имя
+          {% elif field.label|lower == 'password' %}
+          Введите пароль
+          {% endif %}
+          {{ field.errors }}
+          {{ field }}
+          {{ field.help_text }}
+        </label>
+        {% endfor %}
+        <button type="submit" class="animated-btn">
+
+          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect class="shape" height="60" width="320" />
+            <span class="text">Войти</span>
+          </svg>
+        </button>
+      </form>
+      <p class="text-center">Нет аккаунта? <a href="{% url 'register' %}" class="underlined black-link">Зарегистрироватья</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}
