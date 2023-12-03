@@ -13,6 +13,7 @@ class Home(TemplateView):
 
 class Cources(LoginRequiredMixin, ListView):
     model = Cource
+    queryset = Cource.objects.filter(is_active=True)
     login_url = reverse_lazy('login')
     template_name = 'cources.html'
     context_object_name = 'cources'
@@ -26,35 +27,16 @@ class CourceDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'cource'
 
 
+
 class VideoDetail(LoginRequiredMixin, DetailView):
     model = Video
     template_name = 'video_watch.html'
     login_url = reverse_lazy('login')
     context_object_name = 'video'
     
-class QuizDetail(LoginRequiredMixin, TemplateView):
+class QuizDetail(LoginRequiredMixin, DetailView):
     model = Quiz
     template_name = 'quiz.html'
     login_url = reverse_lazy('login')
     context_object_name = 'quiz'
 
-
-# def detail(request):
-#     l = [
-#         {
-#             'id': 0,
-#             'name': 'banana',
-#             'desc': '',
-#             'price': 434.44
-#         },
-#         {
-#             'id': 1,
-#             'name': '',
-#             'desc': '',
-#             'price': 434.44
-#         }
-#     ]
-#     content = {
-#        'catalog_list': l
-#     }
-#     return render(request, 'blog/index.html', context=content)

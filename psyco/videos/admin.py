@@ -2,46 +2,50 @@ from django.contrib import admin
 from videos.models import *
 
 
-class VideoItemInline(admin.TabularInline):
-    model = Video
 
 
+class AnswerInline(admin.TabularInline):
+    model = Answer
 
-# class LessonItemInline(admin.TabularInline):
-#     model = Lesson
-#     inlines = [VideoItemInline]
+    
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ( 'name', 'order', 'updated_at',)
+    list_filter = ('updated_at',)
+    list_editable = ('order',)
+
+    inlines = [AnswerInline]
+
 
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ('lesson', 'updated_at', 'is_active')
-    list_filter = ('is_active', 'updated_at')
-    list_editable = ('is_active',)
-    # inlines = [LessonItemInline]
+    list_display = ('cource', 'updated_at',)
+    list_filter = ('updated_at',)
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'updated_at', 'is_active')
-    list_filter = ('is_active', 'updated_at')
-    list_editable = ('is_active', 'order')
+    list_display = ('title', 'order', 'updated_at',)
+    list_filter = ('updated_at',)
+    list_editable = ('order',)
     search_fields = ('title',)
     # inlines = [LessonItemInline]
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('title', 'updated_at', 'is_active')
-    list_filter = ('is_active', 'updated_at')
-    list_editable = ('is_active',)
+    list_display = ('title', 'order', 'updated_at',)
+    list_filter = ('updated_at',)
+    list_editable = ('order',)
     search_fields = ('title',)
     # inlines = [LessonItemInline]
 
 
 
 class CourceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'updated_at', 'is_active')
-    list_filter = ('is_active', 'updated_at')
-    list_editable = ('is_active',)
+    list_display = ('title', 'updated_at',)
+    list_filter = ('updated_at',)
     search_fields = ('title',)
     # inlines = [LessonItemInline]
 
 
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Lesson, LessonAdmin)

@@ -7,36 +7,64 @@
 <div class="cources-page">
   <div class="container">
     <div class="cources-page__content">
-      <div class="cources-page__cources">
-        <div class="section-mb js-first-quiz">
-{% if quiz %}
-<p>dd</p>
-{% else %}
-<p>c</p>
-{% endif %}
+      <div class="cources-page__cources js-quiz-page">
+        <div class="section-mb quiz-section js-first-quiz">
           <h1 class="title-2 title-mb cources-page__cources-title">
-            Проверочная работа по теме: {{quiz.is_active}}
+            Проверочная работа по курсу: {{quiz.cource.title}}
           </h1>
-          <p class="title-mb"> {{quiz}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia in voluptatum quis esse nam laborum, sint facilis nulla amet! Laudantium eius, corrupti nulla unde ipsam dolor molestias quis quas. Vel!</p>
-          <button class="rect-btn rect-btn_theme">Начать</button>
+          <p class="title-mb">
+            {% if quiz.rules %}
+            {{ quiz.rules }}
+            {% endif %}
+          </p>
+          {% if quiz.questions.all|length %}
+          <button class="rect-btn rect-btn_theme js-quiz-start">Начать</button>
+
+          {% endif %}
         </div>
 
-        <div class="section-mb faded js-finish-quiz">
+        <div class="section-mb quiz-section js-finish-quiz">
           <h1 class="title-2 title-mb">Тест завершен</h1>
-          <p class="title-mb">Вы набрали <span>19</span> из 10</p>
+          <p class="title-mb">Вы набрали <span class="js-count-answers"></span> из {{quiz.questions.all|length}}</p>
 
-          <button class="rect-btn title-mb">Смотреть результаты</button>
+          
           <button class="rect-btn rect-btn_theme" onClick="javascript:history.go(-1);">К списку уроков</button>
         </div>
 
-        <acticle class="quiz faded">
-          <h2 class="title-2">Вопрос</h2>
-          <ul class="quiz__list">
-            <li class="quiz__item"></li>
-          </ul>
-          <button class="ret-btn">Далее</button>
+        {% if quiz.questions.all|length %}
+
+        {% for question in quiz.questions.all %}
+        <acticle class="quiz js-quiz">
+          <h2 class="title-3">{{forloop.counter}}. {{ question.name }}</h2>
+          <iframe src="{{ question.link }}" width="280" height="220" allowfullscreen frameborder="0"></iframe>
+          {% if question.answers.all|length %}
+
+          <form class="radio-group quiz__list js-quiz-form">
+            {% for answ in question.answers.all %}
+            {% if answ.is_right %}
+            <input class="r" type="radio" id="{{question.id}}_{{answ.id}}" name="answer" value="{{question.id}}_{{answ.id}}">
+            {% else %}
+            <input type="radio" id="{{question.id}}_{{answ.id}}" name="answer" value="{{question.id}}_{{answ.id}}">
+            {% endif %}
+            <label for="{{question.id}}_{{answ.id}}">{{answ.name}}</label>
+            
+            {% endfor %}
+
+          </form>
+          {% else %}
+          <p>Вопрос не требует ответа</p>
+          {% endif %}
+          <p class="faded comment">Комментарий: {{ question.comment }}</p>
         </acticle>
 
+        {% empty %}
+        <p>Вопросы находятся в разработке:)</p>
+        {% endfor %}
+        <div class="js-quiz-results">
+          <button class="rect-btn title-mb ">Смотреть результаты</button>
+
+        </div>
+        {% endif %}
 
 
 

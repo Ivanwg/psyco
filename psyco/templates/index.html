@@ -57,9 +57,11 @@
         Компетенция - это удобный и доступный способ повысить свою квалификацию и получить новые знания в области психологии. Регистрируйтесь на платформе и начинайте учиться уже сегодня!
       </p>
 
+      {% if not request.user.is_authenticated %}
       <a href="{% url 'cources' %}" class="rect-btn rect-btn_theme home-page__banner-btn">
         Зарегистрироватья
       </a>
+      {% endif %}
     </section>
 
     <section class="home-page__section section-mb">
